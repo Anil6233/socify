@@ -1,0 +1,29 @@
+<h2><strong><span class="ingredient">Find Friends</span></strong></h2>
+<div class="follow">
+  <table>
+    <thead>
+      <tr>
+        <th colspan="0"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user|%>
+      <% if @friends.include?(user.id) %>
+        <%= form_tag home_unfollow_path( user: user, crnt_user: @user.id ), method: :post do %>
+          <tr>
+              <td><span class = "ingre"> <%= user.name %></span></td>
+              <td><%= button_tag 'unfollow', class: 'btn btn-primary' %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <%= form_tag home_follow_path(user: user, crnt_user: @user.id ), method: :post do %>
+          <td><%= user.name %></td>
+          <td><%= button_tag 'follow', class: 'btn btn-success' %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>

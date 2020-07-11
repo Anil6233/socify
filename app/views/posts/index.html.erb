@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+<%  @posts.each do |post| %>
+<h3><strong><%= link_to  post.user.name , post_url(post)%></h3>
+<p>
+  <strong></strong>
+  <%= image_tag post.attachment_url %>
+</p>
+
+
+<p>
+<strong><span class="ingredient">LIKE/UNLIKE:</span></strong>
+<%= link_to like_post_path(post.id),  method: :put, remote: true do %>
+  <button type="button" class="btn btn-info" aria-label="Left Align">
+    <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+    <span class="badge"><%= post.get_upvotes.size %></span>
+  </button>
+<% end %>
+
+<%= link_to dislike_post_path(post.id),  method: :put, remote: true do %>
+  <button type="button" class="btn btn-info" aria-label="Left Align">
+    <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidden="true"></span>
+    <span class="badge"><%= post.get_downvotes.size %></span>
+  </button>
+<% end %>
+</p>
+<p>
+<div>
+  <strong><span class="ingredient">Comments:</span></strong>
+  <%if post.comments.each do |comment| %>
+    <% user = User.find(comment.user_id)  %>
+    <p><strong><span class="ingred"><%= user.name %>:</span></strong>
+  <%= comment.comment %></p>
+  <% end %>
+<% end %>
+  <%= form_tag comments_path(commentable_type: post.class.to_s, commentable_id: post.id), method: :post, remote: true do %>
+    <strong><span  class="ingredient" >You</span></strong>
+    <%= text_field :comment, :comment%>
+    <%= button_tag 'send', class: 'btn btn-success' %>
+  <% end %>
+  </div>
+</p>
+<% end %>
+
+

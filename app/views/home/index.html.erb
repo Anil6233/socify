@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag current_user.cover_url %>
+
+
+<table>
+  <tr>
+        <td><strong><span class="ingredient">Name:</span></strong></td>
+        <td><%= current_user.name %></td>
+  </tr>
+  <tr>
+        <td><strong><span class="ingredient">Email:</span></strong></td>
+        <td><%= current_user.email %></td>
+  </tr>
+
+  <tr>
+        <td><strong><span class="ingredient">Posts:</span></strong></td>
+        <td><%= current_user.posts.count %></td>
+  </tr>
+
+        <th colspan="0"></th>
+ </table>
+  
+ <%= link_to "Edit Profile", edit_user_registration_path %>
+
+ <table>
+   <thead>
+     <tr>
+     <th><span class="ingredient">NAME</span></th>
+     <th><span class="ingredient">EMAIL</span></th>
+     <th><span class="ingredient">POSTS</span></th>
+     <th colspan="10"></th>
+     </tr>
+   </thead>
+ 
+   <tbody>
+     <strong><p>You are following <%= pluralize( @friends.count, "friend") %></p> </strong>
+     <% @friends.each do |friend| %>
+       <tr>
+           <td><%= friend.name %></td>
+           <td><%=  friend.email %></td>
+           <td><%= friend.posts.length %></td>
+           <td><%= link_to 'unfollow', home_unfollow_path(user: friend , crnt_user: current_user.id )  %></td>
+       </tr>
+     <% end %>
+   </tbody>
+ </table>
+
+ <strong><p>You have liked <%= pluralize( @liked_posts.count, "post") %></p> </strong>
+<% @liked_posts.each do |post| %>
+    <p><span class="ingredient"> <%=post.content%></span> </p>
+<% end %>
+
+
+
+
+
