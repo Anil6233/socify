@@ -64,7 +64,7 @@ gem 'devise'
 gem 'bootstrap-sass', '~> 3.4.1'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.13.0'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem 'acts_as_votable'
 gem 'acts_as_commentable'
 gem "acts_as_follower", github: "tcocca/acts_as_follower"
